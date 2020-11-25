@@ -36,14 +36,14 @@ function Home() {
             image="https://m.media-amazon.com/images/I/41W5-duvLkL._AC_SY200_.jpg"
             price={19.99}
             rating={5}
-          />{' '}
+          />
           <Product
             id="23"
             title="d"
             image="https://m.media-amazon.com/images/I/41W5-duvLkL._AC_SY200_.jpg"
             price={19.99}
             rating={5}
-          />{' '}
+          />
           <Product
             id="24"
             title="e"
