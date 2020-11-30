@@ -2,5 +2,8 @@
   "editor.formatOnSave": false,
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
   }
 }

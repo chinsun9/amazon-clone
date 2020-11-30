@@ -1,10 +1,27 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-/* eslint-disable react/button-has-type */
 import React from 'react';
 import './Product.css';
+import { userStateValue } from './StateProvider';
 
-function Product({ title, image, price, rating }) {
+function Product({ id, title, image, price, rating }) {
+  const [{ basket }, dispatch] = userStateValue();
+  console.log(`this is the basket >>> `, basket);
+
+  const addToBasket = () => {
+    // dispatch the item into the data layer
+    dispatch({
+      type: 'ADD_TO_BASKET',
+      item: {
+        id,
+        title,
+        image,
+        price,
+        rating,
+      },
+    });
+  };
+
   return (
     <div className="product">
       <div className="product__info">
@@ -23,7 +40,9 @@ function Product({ title, image, price, rating }) {
       </div>
 
       <img src={image} alt="p" />
-      <button>Add to Basket</button>
+      <button type="button" onClick={addToBasket}>
+        Add to Basket
+      </button>
     </div>
   );
 }
