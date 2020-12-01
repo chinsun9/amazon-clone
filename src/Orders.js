@@ -9,10 +9,7 @@ function Orders() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    console.log(1, user);
     if (user) {
-      console.log(2, user);
-
       getOrders(user, setOrders);
     } else {
       setOrders([]);
