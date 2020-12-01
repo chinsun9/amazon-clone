@@ -17,14 +17,14 @@ function Home() {
             id="1"
             title="a"
             image="https://m.media-amazon.com/images/I/41W5-duvLkL._AC_SY200_.jpg"
-            price={19.99}
+            price={0.1}
             rating={5}
-          />{' '}
+          />
           <Product
             id="2"
             title="b"
             image="https://m.media-amazon.com/images/I/41W5-duvLkL._AC_SY200_.jpg"
-            price={119.99}
+            price={0.2}
             rating={3}
           />
         </div>

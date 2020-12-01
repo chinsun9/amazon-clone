@@ -2,7 +2,7 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
 import './Subtotal.css';
-import CurrencyForamt from 'react-currency-format';
+import CurrencyFormat from 'react-currency-format';
 import { useHistory } from 'react-router-dom';
 import { userStateValue } from './StateProvider';
 import { getBasketTotal } from './reducer';
@@ -13,7 +13,7 @@ function Subtotal() {
 
   return (
     <div className="subtotal">
-      <CurrencyForamt
+      <CurrencyFormat
         renderText={(value) => (
           <>
             <p>
