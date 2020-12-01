@@ -18,8 +18,9 @@ function Payment() {
   const elements = useElements();
 
   const [succeeded, setSucceeded] = useState(false);
-  const [processing, setProcessing] = useState('');
-  const [error, setError] = useState(null);
+  const [processing, setProcessing] = useState(false);
+  const [cardElementError, setCardElementError] = useState(null);
+  const [secretError, setSecretError] = useState(null);
   const [disabled, setDisabled] = useState(true);
   const [clientSecret, setClientSecret] = useState(true);
 
@@ -36,8 +37,10 @@ function Payment() {
             (getBasketTotal(basket) * 100).toFixed(2)
           )}`,
         });
+        setSecretError(null);
       } catch (error) {
         response = error.response;
+        setSecretError(error.response.data.errormessage);
       }
 
       console.log('the secret is >>>', response.data);
@@ -74,7 +77,7 @@ function Payment() {
           });
 
         setSucceeded(true);
-        setError(null);
+        setCardElementError(null);
         setProcessing(false);
 
         history.replace('/orders');
@@ -84,14 +87,18 @@ function Payment() {
         });
       })
       .catch();
+
+    console.log(payload);
     // const payload = await stripe
   };
 
   const handleChange = (event) => {
     // Listen for changes in the cardElement
     // and display any errors as the customer types their card details
-    setDisabled(event.empty);
-    setError(event.error ? event.error.message : '');
+    setDisabled(!event.complete);
+
+    console.log(event, processing, ',', disabled, ',', succeeded);
+    setCardElementError(event.error ? event.error.message : '');
   };
 
   return (
@@ -129,6 +136,7 @@ function Payment() {
                 />
               );
             })}
+            {secretError && <p>{secretError}</p>}
           </div>
         </div>
         <div className="payment__section">
@@ -148,13 +156,18 @@ function Payment() {
                   thousandSeparator
                   prefix="$"
                 />
-                <button disabled={processing || disabled || succeeded}>
+
+                <button
+                  disabled={
+                    processing || disabled || succeeded || secretError != null
+                  }
+                >
                   <span>{processing ? <p>Processing</p> : 'Buy Now'}</span>
                 </button>
               </div>
 
               {/* Errors */}
-              {error && <div>{error}</div>}
+              {cardElementError && <div>{cardElementError}</div>}
             </form>
           </div>
         </div>
