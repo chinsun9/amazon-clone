@@ -6,10 +6,9 @@
     height: max-content;
 }
 
-/* .checkout__ad {
+.checkout__left {
     width: 100%;
-    margin-bottom: 10px;
-} */
+}
 
 .chekcout__title {
     margin-right: 10px;

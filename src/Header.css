@@ -28,6 +28,11 @@
     background-color: #cd9042;
 }
 
+.header__searchInput {
+    width: 100%;
+    height: 26px;
+}
+
 .header__optionLineOne {
     font-size: 10px;
 }
