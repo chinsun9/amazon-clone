@@ -1,14 +1,13 @@
-/* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import CurrencyFormat from 'react-currency-format';
 import CheckoutProduct from './CheckoutProduct';
 import { userStateValue } from './StateProvider';
-import './Payment.css';
 import { getBasketTotal } from './reducer';
 import axios from './axios';
 import { db } from './firebase';
+import './Payment.css';
 
 function Payment() {
   const [{ basket, user }, dispatch] = userStateValue();
@@ -97,7 +96,7 @@ function Payment() {
     // and display any errors as the customer types their card details
     setDisabled(!event.complete);
 
-    console.log(event, processing, ',', disabled, ',', succeeded);
+    // console.info(event, processing, ',', disabled, ',', succeeded);
     setCardElementError(event.error ? event.error.message : '');
   };
 
@@ -158,6 +157,7 @@ function Payment() {
                 />
 
                 <button
+                  type="button"
                   disabled={
                     processing || disabled || succeeded || secretError != null
                   }
@@ -166,7 +166,6 @@ function Payment() {
                 </button>
               </div>
 
-              {/* Errors */}
               {cardElementError && <div>{cardElementError}</div>}
             </form>
           </div>

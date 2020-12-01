@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import './Product.css';
 import { userStateValue } from './StateProvider';
+import './Product.css';
 
 function Product({ id, title, image, price, rating }) {
   const [, dispatch] = userStateValue();

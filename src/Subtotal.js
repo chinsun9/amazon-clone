@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/button-has-type */
 import React from 'react';
 import './Subtotal.css';
 import CurrencyFormat from 'react-currency-format';
@@ -9,7 +7,7 @@ import { getBasketTotal } from './reducer';
 
 function Subtotal() {
   const history = useHistory();
-  const [{ basket }, dispatch] = userStateValue();
+  const [{ basket }] = userStateValue();
 
   return (
     <div className="subtotal">
@@ -32,7 +30,7 @@ function Subtotal() {
         prefix="$"
       />
 
-      <button onClick={(e) => history.push('/payment')}>
+      <button type="button" onClick={() => history.push('/payment')}>
         Proceed to Checkout
       </button>
     </div>

@@ -10,8 +10,6 @@ function Checkout() {
   return (
     <div className="checkout">
       <div className="checkout__left">
-        {/* <img src="" alt="" className="checkout__ad" /> */}
-
         <div>
           <h3>Hello, {user?.email}</h3>
           <h2 className="chekcout__title">Your shopping Basket</h2>
