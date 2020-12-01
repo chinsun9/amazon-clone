@@ -5,7 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { Link } from 'react-router-dom';
 import { userStateValue } from './StateProvider';
-import { auth } from './firebase';
+import { signOut } from './firebase';
 import './Header.css';
 
 function Header() {
@@ -13,7 +13,7 @@ function Header() {
 
   const handleAuthentication = () => {
     if (user) {
-      auth.signOut();
+      signOut(user);
     }
   };
 

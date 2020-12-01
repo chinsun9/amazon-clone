@@ -157,7 +157,7 @@ function Payment() {
                 />
 
                 <button
-                  type="button"
+                  type="submit"
                   disabled={
                     processing || disabled || succeeded || secretError != null
                   }
