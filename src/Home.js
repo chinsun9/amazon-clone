@@ -25,7 +25,7 @@ function Home() {
             title="b"
             image="https://m.media-amazon.com/images/I/41W5-duvLkL._AC_SY200_.jpg"
             price={0.2}
-            rating={3}
+            rating={4}
           />
         </div>
 
@@ -34,22 +34,22 @@ function Home() {
             id="22"
             title="c"
             image="https://m.media-amazon.com/images/I/41W5-duvLkL._AC_SY200_.jpg"
-            price={19.99}
-            rating={5}
+            price={5.0}
+            rating={3}
           />
           <Product
             id="23"
             title="d"
             image="https://m.media-amazon.com/images/I/41W5-duvLkL._AC_SY200_.jpg"
-            price={19.99}
-            rating={5}
+            price={4.99}
+            rating={2}
           />
           <Product
             id="24"
             title="e"
             image="https://m.media-amazon.com/images/I/41W5-duvLkL._AC_SY200_.jpg"
-            price={19.99}
-            rating={5}
+            price={0.5}
+            rating={1}
           />
         </div>
 
@@ -58,7 +58,7 @@ function Home() {
             id="25"
             title="f"
             image="https://m.media-amazon.com/images/I/41W5-duvLkL._AC_SY200_.jpg"
-            price={19.99}
+            price={0.49}
             rating={5}
           />
         </div>
