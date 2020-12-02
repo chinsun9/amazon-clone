@@ -24,6 +24,7 @@ function Payment() {
   const [clientSecret, setClientSecret] = useState(true);
 
   useEffect(() => {
+    setProcessing(true);
     // generate the special stripe secret which allows us to change a customer
     const getClientSecret = async () => {
       console.log(`getClientSecret pending...`);
@@ -40,9 +41,11 @@ function Payment() {
       } catch (error) {
         response = error.response;
         setSecretError(error.response.data.errormessage);
+      } finally {
+        setProcessing(false);
+        console.log('the secret is >>>', response.data);
       }
 
-      console.log('the secret is >>>', response.data);
       setClientSecret(response.data.clientSecret);
     };
 
@@ -56,38 +59,50 @@ function Payment() {
 
     setProcessing(true);
 
-    const payload = await stripe
-      .confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: elements.getElement(CardElement),
-        },
-      })
-      .then(({ paymentIntent }) => {
-        // paymentIntent = payment confirmation
+    try {
+      const payload = await stripe
+        .confirmCardPayment(clientSecret, {
+          payment_method: {
+            card: elements.getElement(CardElement),
+          },
+        })
+        .then(({ paymentIntent }) => {
+          // paymentIntent = payment confirmation
 
-        db.collection('users')
-          .doc(user?.uid)
-          .collection('orders')
-          .doc(paymentIntent.id)
-          .set({
-            basket,
-            amount: paymentIntent.amount,
-            created: paymentIntent.created,
+          db.collection('users')
+            .doc(user?.uid)
+            .collection('orders')
+            .doc(paymentIntent.id)
+            .set({
+              basket,
+              amount: paymentIntent.amount,
+              created: paymentIntent.created,
+            });
+
+          setSucceeded(true);
+          setCardElementError(null);
+          setProcessing(false);
+
+          history.replace('/orders');
+
+          dispatch({
+            type: 'EMPTY_BASKET',
           });
-
-        setSucceeded(true);
-        setCardElementError(null);
-        setProcessing(false);
-
-        history.replace('/orders');
-
-        dispatch({
-          type: 'EMPTY_BASKET',
+        })
+        .catch((error) => {
+          setProcessing(false);
+          setCardElementError(error.response.data);
         });
-      })
-      .catch();
+      console.log(payload);
+    } catch (error) {
+      console.log(error);
+      setCardElementError('api error...');
+    } finally {
+      setTimeout(() => {
+        setProcessing(false);
+      }, 2000);
+    }
 
-    console.log(payload);
     // const payload = await stripe
   };
 
